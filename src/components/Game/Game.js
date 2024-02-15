@@ -3,10 +3,9 @@ import React, { useState } from "react";
 import GuessInput from "../GuessInput";
 import { MAX_GUESSES } from "../../constants";
 import Guess from "../Guess";
-import { checkGuess } from "../../game-helpers";
 import Banner from "../Banner";
 
-function Game({ answer }) {
+function Game({ answer, reset }) {
   const [currentGuesses, setCurrentGuesses] = useState(Array(6).fill(""));
   const [count, setCount] = useState(0);
   const canStillGuess = count < MAX_GUESSES;
@@ -37,12 +36,18 @@ function Game({ answer }) {
           <strong>
             {answer} in {count} guesses.
           </strong>
+          <button onClick={reset} className={"reset"}>
+            Restart
+          </button>
         </Banner>
       );
     } else if (!canStillGuess && !foundAnswer) {
       return (
         <Banner status={"fail"}>
           Sorry, the correct answer was <strong>{answer}</strong>
+          <button onClick={reset} className={"reset"}>
+            Restart
+          </button>
         </Banner>
       );
     }

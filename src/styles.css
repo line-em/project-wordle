@@ -3,7 +3,7 @@
 */
 html {
     overflow-y: scroll;
-    --sans: 'Raleway Variable', sans-serif;
+    --sans: 'Rubik Variable', sans-serif;
     --game-spacing: 32px;
     --header-height: 4rem;
 
@@ -17,14 +17,7 @@ html {
     --color-gray-700: hsl(0deg 0% 75%);
     --color-gray-800: hsl(0deg 0% 87%);
     --color-gray-900: hsl(0deg 0% 93%);
-    --s: 20px; /* control the size */
-
-    --_g: #0000 83%, var(--color-gray-800) 85% 99%, #0000 101%;
-    background: radial-gradient(27% 29% at right, var(--_g)) calc(var(--s) / 2) var(--s),
-    radial-gradient(27% 29% at left, var(--_g)) calc(var(--s) / -2) var(--s),
-    radial-gradient(29% 27% at top, var(--_g)) 0 calc(var(--s) / 2),
-    radial-gradient(29% 27% at bottom, var(--_g)) 0 calc(var(--s) / -2) var(--color-gray-900);
-    background-size: calc(2 * var(--s)) calc(2 * var(--s));
+    background-color: var(--color-gray-900);
 
 }
 
@@ -54,6 +47,13 @@ button {
     text-align: center;
 }
 
+button.reset {
+    display: flex;
+    margin: 8px auto;
+    background-color: var(--color-warning);
+    color:var(--color-gray-100)
+}
+
 button:disabled {
     background: var(--color-gray-700);
     color: var(--color-gray-900);
@@ -77,6 +77,9 @@ header {
     border-bottom: 1px solid var(--color-gray-700);
     color: white;
     background-color: var(--color-accent);
+    justify-content: center;
+    gap: 16px;
+    align-items: center;
 }
 
 header .side {
@@ -86,7 +89,6 @@ header .side {
 }
 
 h1 {
-    flex: 1;
     font-size: 2rem;
     line-height: var(--header-height);
     text-align: center;
@@ -185,9 +187,6 @@ h1 {
     display: grid;
     grid-template-columns: 1fr;
     gap: 8px;
-    background-color: whitesmoke;
-    border-radius: 8px;
-    padding: 12px;
 }
 
 .guess-input-wrapper label {
@@ -239,6 +238,8 @@ h1 {
     background: var(--color-error);
     color: white;
 }
+
+
 
 .visually-hidden {
     position: absolute;
