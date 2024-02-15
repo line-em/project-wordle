@@ -1,53 +1,29 @@
-import React from 'react';
+import React, {useState} from 'react';
 
-import { sample } from '../../utils';
-import { EN_WORDS } from '../../words-en';
-import {PT_WORDS} from "../../words-ptbr";
 import GuessInput from "../GuessInput";
+import {MAX_GUESSES} from "../../constants";
+import Guess from "../Guess";
 
-function Game({lang}) {
-  const answer = sample(lang === "EN" ? EN_WORDS : PT_WORDS);
-  console.info({answer});
-  return <>
-    <div className="guess-results">
-      <p className="guess">
-        <span className="cell">H</span>
-        <span className="cell">E</span>
-        <span className="cell">L</span>
-        <span className="cell">L</span>
-        <span className="cell">O</span>
-      </p>
-      <p className="guess">
-        <span className="cell">T</span>
-        <span className="cell">H</span>
-        <span className="cell">E</span>
-        <span className="cell">R</span>
-        <span className="cell">E</span>
-      </p>
-      <p className="guess">
-        <span className="cell">W</span>
-        <span className="cell">O</span>
-        <span className="cell">R</span>
-        <span className="cell">L</span>
-        <span className="cell">D</span>
-      </p>
-      <p className="guess">
-        <span className="cell"></span>
-        <span className="cell"></span>
-        <span className="cell"></span>
-        <span className="cell"></span>
-        <span className="cell"></span>
-      </p>
-      <p className="guess">
-        <span className="cell"></span>
-        <span className="cell"></span>
-        <span className="cell"></span>
-        <span className="cell"></span>
-        <span className="cell"></span>
-      </p>
-    </div>
-   <GuessInput />
-  </>;
+function Game({answer}) {
+    const [currentGuesses, setCurrentGuesses] = useState(Array(6).fill("     "));
+    const [count, setCount] = useState(0)
+    console.info({answer});
+
+    const recordGuess = (guess) => {
+        if (!currentGuesses.includes(guess)){
+            const newGuesses = [...currentGuesses]
+            newGuesses[count] = guess
+            setCurrentGuesses(newGuesses)
+            setCount(count + 1)
+        }
+    }
+
+    return <>
+        <div className="guess-results">
+            {currentGuesses.map((guess, index) => <Guess guess={guess} key={index}/>)}
+        </div>
+        {count < MAX_GUESSES && <GuessInput recordGuess={recordGuess}/>}
+    </>;
 }
 
 export default Game;
